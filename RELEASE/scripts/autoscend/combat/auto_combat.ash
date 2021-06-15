@@ -25,7 +25,7 @@ import <autoscend/combat/auto_combat_quest.ash>						//quest specific handling
 //	Advance combat round, nothing happens.
 //	/goto fight.php?action=useitem&whichitem=1
 
-void auto_combatInitialize()
+void auto_combatInitialize(int round, monster enemy, string text)
 {
 	//reset settings for combat at the start of every combat
 	if(round != 0)	//Yes round 0, really.
@@ -66,7 +66,7 @@ string auto_combatHandler(int round, monster enemy, string text)
 	{
 		abort("Some sort of problem occurred, it is past round 25 but we are still in non-gremlin combat...");
 	}
-	auto_combatInitialize();		//reset all combat tracking properties on round 0 of a new combat
+	auto_combatInitialize(round, enemy, text);		//reset properties on round 0 of a new combat
 	string retval;
 	boolean blocked = contains_text(text, "(STUN RESISTED)");
 	set_property("auto_combatHP", my_hp());

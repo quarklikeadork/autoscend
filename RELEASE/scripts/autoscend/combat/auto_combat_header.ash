@@ -4,7 +4,7 @@
 
 #####################################################
 //defined in /autoscend/combat/auto_combat.ash
-void auto_combatInitialize();
+void auto_combatInitialize(int round, monster enemy, string text);
 string auto_combatHandler(int round, monster enemy, string text);		
 
 #####################################################
