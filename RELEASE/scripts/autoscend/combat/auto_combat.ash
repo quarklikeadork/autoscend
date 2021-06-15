@@ -80,47 +80,7 @@ string auto_combatHandler(int round, monster enemy, string text)
 	{
 		awol_combat_helper(text);
 	}
-
-	int majora = -1;
-	if(my_path() == "Disguises Delimit")
-	{
-		matcher maskMatch = create_matcher("mask(\\d+).png", text);
-		if(maskMatch.find())
-		{
-			majora = maskMatch.group(1).to_int();
-			if(round == 0)
-			{
-				auto_log_info("Found mask: " + majora, "green");
-			}
-		}
-		else if(enemy == $monster[Your Shadow])	//matcher fails on your shadow and it always wears mask 1.
-		{
-			majora = 1;
-			auto_log_info("Found mask: 1", "green");
-		}
-		else
-		{
-			abort("Failed to identify the mask worn by the monster [" + enemy + "]. Finish this combat manually then run me again");
-		}
-		set_property("_auto_combatDisguisesDelimitMask", majora);
-		
-		if((majora == 7) && canUse($skill[Swap Mask]))
-		{
-			return useSkill($skill[Swap Mask]);
-		}
-		if(majora == 3)
-		{
-			if(canSurvive(1.5))
-			{
-				return "attack with weapon";
-			}
-			abort("May not be able to survive combat. Is swapping protest mask still not allowing us to do anything?");
-		}
-		if(my_mask() == "protest mask" && canUse($skill[Swap Mask]))
-		{
-			return useSkill($skill[Swap Mask]);
-		}
-	}
+	dd_combat_helper(monster enemy, string text);		//disguise delimit mask identification
 
 	if(get_property("auto_combatDirective") != "")
 	{
