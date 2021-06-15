@@ -1,6 +1,6 @@
 //Path specific combat handling for disguises delimit
 
-void dd_combat_helper(monster enemy, string text)
+void dd_combat_helper(int round, monster enemy, string text)
 {
 	//identify mask worn during disguises delimit path
 	if(my_path() != "Disguises Delimit")
