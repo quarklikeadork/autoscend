@@ -10,6 +10,7 @@ import <autoscend/combat/auto_combat_bees_hate_you.ash>				//path = bees hate yo
 import <autoscend/combat/auto_combat_community_service.ash>			//path = community service
 import <autoscend/combat/auto_combat_heavy_rains.ash>				//path = heavy rains
 import <autoscend/combat/auto_combat_jarlsberg.ash>					//path = avatar of jarlsberg
+import <autoscend/combat/auto_combat_dark_gyffte.ash>				//path = dark gyffte
 import <autoscend/combat/auto_combat_disguises_delimit.ash>			//path = disguises delimit
 import <autoscend/combat/auto_combat_ed.ash>						//path = actually ed the undying
 import <autoscend/combat/auto_combat_gelatinous_noob.ash>			//path = gelatinous noob
@@ -182,15 +183,6 @@ string auto_combatHandler(int round, monster enemy, string text)
 	##stage 4 = prekill. copy, sing along, flyer and other things that need to be done after delevel but before killing
 	retval = auto_combatDefaultStage4(round, enemy, text);
 	if(retval != "") return retval;
-
-	//Ensorcel is a Dark Gyffte specific skill that lets you mind control an enemy to becoming a minion 3/day.
-	//mechanically it is a free runaway that also gives you a vampyre specific pet based on the phylum of the monster you are facing.
-	if(bat_shouldEnsorcel(enemy) && canUse($skill[Ensorcel]) && get_property("auto_bat_ensorcels").to_int() < 3)
-	{
-		set_property("auto_bat_ensorcels", get_property("auto_bat_ensorcels").to_int() + 1);
-		handleTracker(enemy, $skill[Ensorcel], "auto_otherstuff");
-		return useSkill($skill[Ensorcel]);
-	}
 
 	##stage 5 = kill
 	retval = auto_combatDefaultStage5(round, enemy, text);
