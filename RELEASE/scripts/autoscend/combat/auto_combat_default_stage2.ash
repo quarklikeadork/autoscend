@@ -1,4 +1,4 @@
-string auto_combatDefaultStage3(int round, monster enemy, string text)
+string auto_combatDefaultStage2(int round, monster enemy, string text)
 {
 	##stage 2 = enders: escape, replace, instakill, yellowray and other actions that instantly end combat
 	string retval;
